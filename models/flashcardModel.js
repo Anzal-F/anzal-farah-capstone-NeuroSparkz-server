@@ -6,7 +6,7 @@ export const saveFlashcard = async (userId, flashcards) => {
       user_id: userId,
       key_point: flashcard.keyPoint,
       description: flashcard.description,
-      example: flashcard.example || null, // Optional example
+      example: flashcard.example || null, 
     }));
 
     await knex('flashcards').insert(flashcardData);
@@ -29,15 +29,13 @@ export const getUserFlashcards = async (userId) => {
 
 export const regenerateFlashcards = async (userId, flashcards) => {
     try {
-      // Your logic to regenerate flashcards (e.g., update existing ones or generate new ones)
       const regeneratedFlashcards = flashcards.map((flashcard) => ({
         user_id: userId,
         key_point: flashcard.keyPoint,
         description: flashcard.description,
         example: flashcard.example || null,
       }));
-  
-      // Update or insert into database
+      
       await knex('flashcards').insert(regeneratedFlashcards);
       return { message: 'Flashcards regenerated successfully' };
     } catch (error) {
