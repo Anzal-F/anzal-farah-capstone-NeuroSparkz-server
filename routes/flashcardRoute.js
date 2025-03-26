@@ -85,7 +85,7 @@ router.post('/generate-flashcards', async (req, res, next) => {
       console.log('🔐 User is logged in. Saving flashcards...');
       
       const userId = req.user.id;
-      const user = await db('users').where({ id: userId }).first(); 
+      const user = await db('users').where({ id: userId }).first(); // Use db instead of knex
 
       if (!user) {
         console.log('❌ User not found!');
@@ -125,7 +125,7 @@ router.post('/generate-flashcards', async (req, res, next) => {
 // GET user's flashcards
 router.get('/user-flashcards/:userId', authMiddleware, async (req, res) => {
   try {
-    let { userId } = req.params;
+    const userId = req.user.id; 
 
     if (userId.startsWith(":")) {
       userId = userId.slice(1);

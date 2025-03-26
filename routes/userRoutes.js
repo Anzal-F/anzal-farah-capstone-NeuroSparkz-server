@@ -26,7 +26,7 @@ const authenticateToken = (req, res, next) => {
 
 // ✅ Endpoint to get userId after login
 router.get('/get-userid', authenticateToken, async (req, res) => {
-  const userId = req.user.id; // Extracted from JWT token
+  const userId = req.user.id; 
 
   try {
     const user = await knex('users').where({ id: userId }).first();
